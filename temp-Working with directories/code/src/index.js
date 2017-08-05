@@ -5,6 +5,8 @@
  */
 
 console.log("Working with Folder");
+let fileManager = require('./fileManager');
+fileManager.listJPGFiles('/Users/hoangnd/temp');
 
 
 
