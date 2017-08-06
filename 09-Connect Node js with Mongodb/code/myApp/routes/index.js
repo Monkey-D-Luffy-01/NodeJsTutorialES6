@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+// var mongoose = require('mongoose'),
+//     Food = mongoose.model('Food');
+let Food = require('../models/food')
 
 /* GET home page. */
 router.get('/', (request, response, next) => {
@@ -11,6 +14,11 @@ router.get('/list_all_foods', (request, response, next) => {
 });
 
 router.post('/insert_new_food', (request, response, next) => {
+
+    const newFood = new Food({
+        name: request.body.name,
+        foodDescription: request.body.foodDescription
+    });
     response.end("POST requested => insert_new_food");
 });
 

@@ -10,6 +10,50 @@ var users = require('./routes/users');
 
 var app = express();
 
+var mongoose = require('mongoose');
+/**
+ * Step 1:
+ rm -rf /Users/hoangnd/tutorials/NodeJsTutorialES6/database
+ mkdir  /Users/hoangnd/tutorials/NodeJsTutorialES6/database
+ mongod --port 27017 --dbpath /Users/hoangnd/tutorials/NodeJsTutorialES6/database
+ Step 2:
+ Connect to DB, create database user:
+ mongo --port 27017
+
+ use tutorialMongoDB
+
+ db.createUser({
+   user: "hoangnd",
+   pwd: "hoangnd",
+   roles: [ "readWrite", "dbAdmin" ]
+ })
+
+ Step 3:
+ Re-start the MongoDB instance with access control.
+ mongod --auth --port 27017 --dbpath /Users/hoangnd/tutorials/NodeJsTutorialES6/database
+
+ Step 4:
+ Connect mongdDB:
+ mongo --port 27017 -u "hoangnd" -p "hoangnd" --authenticationDatabase "tutorialMongoDB"
+
+ */
+let options = {
+  db: {native_parser: true},
+  server: {poolSize: 5},
+  user: 'hoangnd',
+  pass: 'hoangnd'
+}
+//using promises
+mongoose.connect('mongodb://localhost:27017/tutorialMongoDB', options).then(
+    () => {
+        console.log("connect DB successfully");
+    },
+    err => {
+        console.log('Connection failed. Error: ${err}');
+    }
+
+);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
