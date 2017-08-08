@@ -41,3 +41,4 @@ router.put('/update_a_food', (request, response, next) => {
 router.delete('/delete_a_food', (request, response, next) => {
     response.end("DELETE requested => delete_a_food");
 });
+module.exports = router;

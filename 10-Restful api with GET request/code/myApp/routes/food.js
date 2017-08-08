@@ -4,9 +4,30 @@
 var express = require('express');
 var router = express.Router();
 let Food = require('../models/FoodModel');
+require('../models/FoofModel')
 
 router.get('/list_all_foods', (request, response, next) => {
-    response.end("GET requested => list_all_foods");
+    // response.end("GET requested => list_all_foods");
+    Food.find({}).limit(10).sort({name: -1}).
+        select({
+            name: 1,
+            foodDescription: 1,
+            created_date: 1
+        }).exec((err, foods) => {
+            if (err) {
+                response.json({
+                    result: "failed",
+                    data: [],
+                    messege: `Error is : ${err}`
+                });
+            } else {
+                response.json({
+                    result: "ok",
+                    data: foods,
+                    messege: "Insert new food successfully"
+                });
+            }
+        });
 });
 
 router.post('/insert_new_food', (request, response, next) => {
@@ -26,9 +47,9 @@ router.post('/insert_new_food', (request, response, next) => {
                 result: "ok",
                 data: {
                     name: request.body.name,
-                    foodDescription: request.body.foodDescription,
-                    messege: "Insert new food successfully"
-                }
+                    foodDescription: request.body.foodDescription
+                },
+                messege: "Insert new food successfully"
             });
         }
     });
