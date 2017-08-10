@@ -1,8 +1,5 @@
 /**
- * Created by hoangnd on 8/9/17.
- */
-/**
- * Created by hoangnd on 8/7/17.
+ * Created by hoangnd on 8/10/17.
  */
 'use strict';
 var mongoose = require('mongoose');

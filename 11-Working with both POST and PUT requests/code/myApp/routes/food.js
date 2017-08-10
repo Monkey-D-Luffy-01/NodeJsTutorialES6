@@ -4,6 +4,7 @@
 var router = global.router;
 let Food = require('../models/FoodModel');
 var mongoose = require('mongoose');
+
 router.get('/list_all_foods', (request, response, next) => {
     //response.end("GET requested => list_all_foods");
     Food.find({}).limit(100).sort({name: 1}).select({
@@ -30,7 +31,7 @@ router.get('/list_all_foods', (request, response, next) => {
 });
 //Example: http://localhost:3001/get_food_with_id?food_id=598a688878fee204ee51cd31
 router.get('/get_food_with_id', (request, response, next) => {
-    Food.findById(mongoose.Types.ObjectId(request.query.food_id),
+    Food.findById(require('mongoose').Types.ObjectId(request.query.food_id),
         (err, food) => {
             if (err) {
                 response.json({
@@ -91,6 +92,7 @@ router.post('/insert_new_food', (request, response, next) => {
         foodDescription: request.body.foodDescription
     });
     newFood.save((err) => {
+        debugger;
         if (err) {
             response.json({
                 result: "failed",
@@ -111,7 +113,6 @@ router.post('/insert_new_food', (request, response, next) => {
 });
 
 router.put('/update_a_food', (request, response, next) => {
-    debugger;
     let conditions = {};//search record with "conditions" to update
     if (mongoose.Types.ObjectId.isValid(request.body.food_id) == true) {
         conditions._id = mongoose.Types.ObjectId(request.body.food_id);
@@ -129,13 +130,10 @@ router.put('/update_a_food', (request, response, next) => {
     const options = {
         new: true, // return the modified document rather than the original.
     }
-
-    if(mongoose.Types.ObjectId.isValid(request.body.category_id) == true) {
-        newValues._id = mongoose.Types.ObjectId(request.query.category_id);
+    if (mongoose.Types.ObjectId.isValid(request.body.category_id) == true) {
+        newValues.category_id = mongoose.Types.ObjectId(request.query.category_id);
     }
-    debugger;
     Food.findOneAndUpdate(conditions, {$set: newValues}, options, (err, updatedFood) => {
-        debugger;
         if (err) {
             response.json({
                 result: "failed",

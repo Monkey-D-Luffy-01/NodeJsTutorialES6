@@ -1,8 +1,5 @@
 /**
- * Created by hoangnd on 8/9/17.
- */
-/**
- * Created by hoangnd on 8/7/17.
+ * Created by hoangnd on 8/10/17.
  */
 var router = global.router;
 let Category = require('../models/CategoryModel');
@@ -11,7 +8,6 @@ router.post('/insert_new_category', (request, response, next) => {
     const criteria = {
         name: new RegExp('^' + request.body.name.trim() + '$', "i")
     };
-    debugger;
     Category.find(criteria).limit(1).exec((err, categories) => {
         if (err) {
             response.json({
@@ -20,7 +16,8 @@ router.post('/insert_new_category', (request, response, next) => {
                 messege: `Error is : ${err}`
             });
         } else {
-            if(categories.length > 0) {
+            //If it exist, donot allow to insert !
+            if (categories.length > 0) {
                 response.json({
                     result: "failed",
                     data: [],
@@ -50,11 +47,4 @@ router.post('/insert_new_category', (request, response, next) => {
             }
         }
     });
-
 });
-
-router.delete('/delete_a_category', (request, response, next) => {
-
-});
-module.exports = router;
-
