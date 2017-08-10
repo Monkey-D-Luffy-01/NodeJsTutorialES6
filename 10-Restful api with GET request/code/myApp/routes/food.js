@@ -58,7 +58,9 @@ router.get('/list_foods_with_criteria', (request, response, next) => {
         });
     }
     let criteria = {
-        name: new RegExp(request.query.name, "i"),// <=> where name like '%abc%' in sql
+        //name: new RegExp(request.query.name, "i"),// <=> where name like '%abc%' in sql
+        //Example: http://localhost:3001/list_foods_with_criteria?name=japanese%20salad
+        name: new RegExp('^' + request.query.name + '$', "i"),//"i" = case-insensitive
     };
     const limit = parseInt(request.query.limit) > 0 ? parseInt(request.query.limit) : 100;
     Food.find(criteria).limit(limit).sort({name: 1}).select({
