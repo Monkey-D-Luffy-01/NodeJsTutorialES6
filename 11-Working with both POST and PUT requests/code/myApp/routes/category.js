@@ -10,19 +10,11 @@ router.post('/insert_new_category', (request, response, next) => {
     };
     Category.find(criteria).limit(1).exec((err, categories) => {
         if (err) {
-            response.json({
-                result: "failed",
-                data: [],
-                messege: `Error is : ${err}`
-            });
+
         } else {
             //If it exist, donot allow to insert !
             if (categories.length > 0) {
-                response.json({
-                    result: "failed",
-                    data: [],
-                    messege: 'Can not insert because the name exists'
-                });
+
             } else {
                 //Can insert
                 const newCategory = new Category({
@@ -48,3 +40,4 @@ router.post('/insert_new_category', (request, response, next) => {
         }
     });
 });
+module.exports = router;

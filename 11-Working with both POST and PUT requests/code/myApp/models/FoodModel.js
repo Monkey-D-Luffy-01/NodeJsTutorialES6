@@ -24,7 +24,8 @@ var FoodSchema = new Schema({
             enum: ['available', 'unavailable']
         }],
         default: ['available']
-    }
+    },
+    categoryId: Schema.ObjectId
 });
 // a setter
 FoodSchema.path('name').set( (inputString) => {

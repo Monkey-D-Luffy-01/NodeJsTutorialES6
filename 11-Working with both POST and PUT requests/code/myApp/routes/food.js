@@ -129,9 +129,10 @@ router.put('/update_a_food', (request, response, next) => {
     }
     const options = {
         new: true, // return the modified document rather than the original.
+        multi: true
     }
     if (mongoose.Types.ObjectId.isValid(request.body.category_id) == true) {
-        newValues.category_id = mongoose.Types.ObjectId(request.query.category_id);
+        newValues.categoryId = mongoose.Types.ObjectId(request.body.category_id);
     }
     Food.findOneAndUpdate(conditions, {$set: newValues}, options, (err, updatedFood) => {
         if (err) {
