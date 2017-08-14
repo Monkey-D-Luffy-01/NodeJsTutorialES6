@@ -5,6 +5,10 @@
 # Files for the ART/Dalvik VM
 *.dex
 
+uploads
+./uploads
+uploads/
+
 subscribe.png
 subscribe.psd
 database

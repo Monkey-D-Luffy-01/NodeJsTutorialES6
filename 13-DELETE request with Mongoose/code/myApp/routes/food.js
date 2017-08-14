@@ -166,6 +166,7 @@ router.post('/upload_images', (request, response, next) => {
     form.keepExtensions = true;
     form.maxFieldsSize = 10 * 1024 * 1024; //10 MB
     form.multiples = true;
+    debugger;
     form.parse(request, (err, fields, files) => {
         if (err) {
             response.json({
