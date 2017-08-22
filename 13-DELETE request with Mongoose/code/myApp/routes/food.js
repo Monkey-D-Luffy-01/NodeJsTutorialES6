@@ -12,6 +12,7 @@ router.get('/list_all_foods', (request, response, next) => {
         name: 1,
         foodDescription: 1,
         created_date: 1,
+        imageUrl: 1,
         status: 1
     }).exec((err, foods) => {
         if (err) {
