@@ -10,17 +10,25 @@ const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'nodejst9@gmail.com',
-        pass: 'Abc123456789'
+        pass: 'Type your password here'
     }
 });
 
+
+/*
+fileManager.buyAnIphone("iphone 7 plus").then((response) => {
+    console.log(response);
+}).catch((error) => {
+    console.log(`${error}`);
+});
+*/
 fileManager.readJsonFile('./src/jsonfile.json').then((jsonObject) => {
     console.log(`email list = ${jsonObject["emails"]}`);
     let mailOptions = {
         from: 'nodejst9@gmail.com',
         to: jsonObject["emails"],
         subject: 'Sending Email using Node.js',
-        // text: 'That was easy!',
+        // text: 'This email is sent using Node js with nodemailer. Sender: Nguyen Duc Hoang',
         html: '<h1>Welcome !</h1><p>This email is sent using Node js with nodemailer. Sender: Nguyen Duc Hoang</p>'
     };
     transporter.sendMail(mailOptions, (error, info) => {
@@ -30,17 +38,7 @@ fileManager.readJsonFile('./src/jsonfile.json').then((jsonObject) => {
             console.log('Email sent: ' + info.response);
         }
     });
-
 });
-
-/*
-fileManager.buyAnIphone("iphone 7 plus").then((response) => {
-    console.log(response);
-}).catch((error) => {
-    console.log(`${error}`);
-});
-*/
-
 
 
 
