@@ -174,7 +174,14 @@ router.post('/upload_images', (request, response, next) => {
                 messege: `Cannot upload images.Error is : ${err}`
             });
         }
-        var arrayOfFiles = files[""];
+        
+        var arrayOfFiles = [];
+        if(files[""] instanceof Array) {
+            arrayOfFiles = files[""];
+        } else {
+            arrayOfFiles.push(files[""]);
+        }
+        
         if (arrayOfFiles.length > 0) {
             var fileNames = [];
             arrayOfFiles.forEach((eachFile)=> {
