@@ -116,6 +116,7 @@ router.post('/insert_new_food', (request, response, next) => {
 
 router.put('/update_a_food', (request, response, next) => {
     let conditions = {};//search record with "conditions" to update
+    debugger;
     if (mongoose.Types.ObjectId.isValid(request.body.food_id) == true) {
         conditions._id = mongoose.Types.ObjectId(request.body.food_id);
     } else {
@@ -124,10 +125,14 @@ router.put('/update_a_food', (request, response, next) => {
             data: {},
             messege: "You must enter food_id to update"
         });
+        return;
     }
     let newValues = {};
     if (request.body.name && request.body.name.length > 2) {
         newValues.name = request.body.name;
+    }
+    if (request.body.foodDescription && request.body.foodDescription.length > 2) {
+        newValues.foodDescription = request.body.foodDescription;
     }
     //Update image
     if (request.body.image_name && request.body.image_name.length > 0) {
