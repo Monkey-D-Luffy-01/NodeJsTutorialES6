@@ -13,11 +13,15 @@ websocketClient.on('open', () => {
     // setInterval(() => {
     //     i = i + 1
     //     websocketClient.send(`${i} .I am CLIENT !`);
-    // }, 1000);
-    //send binary, cannot send array of objects
-    websocketClient.send([{name: 'hoang', email: 'sunlight4d@gmail.com'}]);   //Cannot send ! 
-    websocketClient.send(["hello","world"]);   //Cannot send ! 
-    websocketClient.send([1,2,3,4,5]);   //send OK !
+    // }, 1000);    
+    var objectsToSend = [{ name: 'hoang1', email: 'email1@gmail.com' }, { name: 'hoang2', email: 'email2@gmail.com' }];
+    // websocketClient.send(BSON.serialize(objectsToSend));           
+    websocketClient.send(JSON.stringify(objectsToSend));//good
+    // websocketClient.send([1,2,3,4,5]);   //send OK !
+});
+
+websocketClient.on('ping', receivedData => {
+    console.log(`After ping, Client received: ${receivedData}`);
 });
 
 websocketClient.on('message',receivedData => {

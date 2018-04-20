@@ -14,10 +14,38 @@ const websocketServer = new WebSocket.Server({
 });
 
 websocketServer.on('connection', (ws, request) => {    
+    ws.isAlive = true;
+    ws.on('pong', () => {
+        this.isAlive = true;                
+    });
     ws.on('message', receivedMessage => {
-        const clientIpAddress = request.connection.remoteAddress;        
-        console.log(`Server received: ${JSON.stringify(receivedMessage)}, client Ip: ${clientIpAddress}`);
+        const clientIpAddress = request.connection.remoteAddress;                
+        try {
+            debugger;            
+            console.log(`Server received: ${JSON.parse(receivedMessage)}, client Ip: ${clientIpAddress}`);                        
+        } catch (ex) {
+            console.log(`Server received: ${receivedMessage}, client Ip: ${clientIpAddress}`);                        
+        }        
         // ws.send(`Server received: ${receivedMessage}`);
     });
     ws.send('I am SERVER !. We are in a connection');
 });
+//Check clients each 30 seconds. Automatically set isAlive=false 
+setInterval(() => {    
+    websocketServer.clients.forEach(ws => {
+        if (ws.isAlive === false) return ws.terminate();
+        ws.isAlive = false;        
+        ws.ping(() => {
+            console.log('ping again after 30 seconds');
+        });
+    });
+}, 10000);
+
+// Broadcast to all
+websocketServer.broadcast = (data) => {
+    websocketServer.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(data);
+        }
+    });
+};
