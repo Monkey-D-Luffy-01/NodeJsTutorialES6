@@ -5,7 +5,7 @@ serviceAccountKey.json
 ./serviceAccountKey.json
 # Files for the ART/Dalvik VM
 *.dex
-
+package-lock.json
 uploads
 ./uploads
 uploads/
