@@ -4,19 +4,19 @@ const router = express.Router();
 import Todo from '../models/Todo';
 import Task from '../models/Task';
 import { isNumeric, isEmpty, isBoolean, isInt, toDate } from 'validator';
+
 //Insert
 router.post('/', async (req, res) => {
-    let { name, priority, description, duedate } = req.body;
-    //How can I validate input params ?
-    if (isEmpty(name) || !isInt(priority, {min: 0, max: 2})
-        || toDate(duedate) ===null) {
+    let { name, priority, description, duedate } = req.body;    
+    if (isEmpty(name) || !isInt(priority, { min: 0, max: 2 })
+         || toDate(duedate)===null) {
         res.json({
             result: 'failed',
             data: {},
             message: `name must not be empty,priority=0..2 dueDate must be yyyy-mm-dd`
         });
         return;
-    }
+    }    
     try {
         let newTodo = await Todo.create({
             name,
@@ -153,6 +153,14 @@ router.get('/', async (req, res) => {
 //Get by Id ?
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
+    if (!isNumeric(id)) {
+        res.json({
+            result: 'failed',
+            data: {},
+            message: `id must be a number`
+        });
+        return;
+    }
     try {
         let todos = await Todo.findAll({
             attributes: ['name', 'priority', 'description', 'duedate'],
@@ -178,7 +186,6 @@ router.get('/:id', async (req, res) => {
                 message: "Cannot find Todo to show"
             });
         }
-
     } catch (error) {
         res.json({
             result: 'failed',

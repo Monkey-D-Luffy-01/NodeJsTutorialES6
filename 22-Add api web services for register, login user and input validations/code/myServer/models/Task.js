@@ -1,5 +1,5 @@
-import Sequelize from 'sequelize';
-import { sequelize } from '../databases/database';
+import Sequelize  from 'sequelize';
+import { sequelize, Op } from '../databases/database';
 
 const Task = sequelize.define('task', {
     id: {

@@ -2,15 +2,15 @@
 import express from "express";
 const router = express.Router();
 //Models
+//Models
 import Todo from '../models/Todo';
 import Task from '../models/Task';
-import { isNumeric, isEmpty, isBoolean } from 'validator';
+import {isNumeric, isEmpty, isBoolean} from 'validator';
 //Insert
 router.post('/', async (req, res) => {	
     try {
         let { todoid, name, isfinished } = req.body;
-        //Validate
-        if (!isNumeric(todoid) || isEmpty(name) || !isBoolean(isfinished)) {
+        if(!isNumeric(todoid) || isEmpty(name) || !isBoolean(isfinished)) {
             res.json({
                 result: 'failed',
                 data: {},
@@ -49,6 +49,7 @@ router.post('/', async (req, res) => {
 //Update
 router.put('/:id', async (req, res) => {
     let { id } = req.params;
+    let { todoid, name, isfinished } = req.body;
     if (!isNumeric(id)) {
         res.json({
             result: 'failed',
@@ -57,7 +58,7 @@ router.put('/:id', async (req, res) => {
         });
         return;
     }
-    let { todoid, name, isfinished } = req.body;
+
     try {
         let tasks = await Task.findAll({
             attributes: ['id', "todoid", "name", "isfinished"],
@@ -104,7 +105,7 @@ router.delete('/:id', async (req, res) => {
             message: `id must be a number`
         });
         return;
-    }
+    }    
     try {
         let numberOfDeletedRows = await Task.destroy({
             where: {
@@ -156,7 +157,7 @@ router.get('/:id', async (req, res) => {
             message: `id must be a number`
         });
         return;
-    }
+    }    
     try {
         let tasks = await Task.findAll({
             attributes: ["id", "todoid", "name", "isfinished"],
@@ -192,10 +193,10 @@ router.get('/todoid/:todoid', async (req, res) => {
         res.json({
             result: 'failed',
             data: {},
-            message: `todoid must be a number`
+            message: `id must be a number`
         });
         return;
-    }
+    }    
     try {
         let tasks = await Task.findAll({
             attributes: ["id", "todoid", "name", "isfinished"],

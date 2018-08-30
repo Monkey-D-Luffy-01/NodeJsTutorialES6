@@ -1,6 +1,6 @@
 //Do the same as Task
 import Sequelize from 'sequelize';
-import { sequelize } from '../databases/database';
+import { sequelize, Op } from '../databases/database';
 import Task from './Task';
 
 const Todo = sequelize.define('todo', {
@@ -26,4 +26,5 @@ const Todo = sequelize.define('todo', {
     });
 Todo.hasMany(Task, { foreignKey: 'todoid', sourceKey: 'id' });
 Task.belongsTo(Todo, { foreignKey: 'todoid', targetKey: 'id' });
+
 export default Todo;
