@@ -9,6 +9,7 @@ module.exports = {
   categoriesPage:  async (req, res) => {   	  	
   	try {
   		const categories = await Categories.find({});  		
+      //console.log(`categories = ${JSON.stringify(categories)}`);
   		res.view('pages/categoriesPage', { categories });	
   	} catch(error) {
   		res.status(500).send({
@@ -42,7 +43,7 @@ module.exports = {
   	try {
   		const {id} = req.params;  		
   		const category = await Categories.findOne({id});
-      // console.log(`category = ${JSON.stringify(category)}`);
+      //console.log(`category = ${JSON.stringify(category)}`);
   		if (category) {
   			 res.view('pages/editCategory', {category: category});               
   		}  		
@@ -56,6 +57,7 @@ module.exports = {
   	try {
   		const {id} = req.params; 
   		const {categoryName, description} = req.body;  		  		
+      console.log(`aa112: ${id}, categoryName = ${categoryName}, description = ${description}`);
   		const category = await Categories.update({id}, {categoryName, description});
   		res.redirect('/categories/categoriesPage');
   	} catch(error) {
