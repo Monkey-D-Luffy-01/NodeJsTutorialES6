@@ -50,6 +50,7 @@ const hoangRef = usersRef.child("hoangnd");
 hoangRef.update({
     field_of_study: "Machine Learning"
 });
+
 //update multiple 
 usersRef.update({
     "hoangnd/field_of_study": "Machine Learning",

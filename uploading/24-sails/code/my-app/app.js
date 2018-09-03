@@ -2,7 +2,31 @@
 sails lift
 sails generate api products
 sails generate api categories
- *
+
+GET /categories
+GET /categories/:id
+POST /categories
+PUT /categories/:id
+DELETE /categories/:id
+I would recommend to use Postman to test the API
+
+Insert
+http://localhost:1337/categories/Create?categoryname=Beverages&description=Soft%20drinks,%20coffees,%20teas,%20beers,%20and%20ales
+http://localhost:1337/categories
+Install sails-mongo:
+npm install sails-mongo
+Open datastore.js
+Open Categories.js
+Install mongodb and Robo3T
+brew install mongodb
+mongo --port 27017 --host localhost
+Config DB in datastore.js
+
+
+Search bootstrap cdn, paste to layout.ejs
+https://getbootstrap.com/docs/4.1/getting-started/introduction/
+
+
  */
 
 process.chdir(__dirname);

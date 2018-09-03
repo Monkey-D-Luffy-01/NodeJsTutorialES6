@@ -238,9 +238,10 @@ module.exports = {
   * > If you have disabled the "sockets" hook, then you can safely remove    *
   * > this section from your `config/env/production.js` file.                *
   *                                                                          *
-  ***************************************************************************/
+  ***************************************************************************/  
   sockets: {
 
+    onlyAllowOrigins: ["http://localhost", "http://localhost"]
     /***************************************************************************
     *                                                                          *
     * Uncomment the `onlyAllowOrigins` whitelist below to configure which      *

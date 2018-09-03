@@ -25,8 +25,9 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'pages/homepage'
+    view: 'pages/homepage',    
   },
+  'get /categories/categoriesPage': 'CategoriesController.categoriesPage'
 
   /***************************************************************************
   *                                                                          *
