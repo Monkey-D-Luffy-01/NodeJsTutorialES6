@@ -39,7 +39,8 @@ module.exports.routes = {
   },
 
   'get /categories/edit/:id': 'CategoriesController.editCategory',
-  'post /categories/update/:id': 'CategoriesController.updateCategory'
+  'post /categories/update/:id': 'CategoriesController.updateCategory',
+  'post /file/uploadImage': 'FileController.uploadImage'
   
 
   /***************************************************************************
