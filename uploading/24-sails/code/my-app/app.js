@@ -21,7 +21,7 @@ Install mongodb and Robo3T
 brew install mongodb
 mongo --port 27017 --host localhost
 Config DB in datastore.js
-
+npm install node-query
 
 Search bootstrap cdn, paste to layout.ejs
 https://getbootstrap.com/docs/4.1/getting-started/introduction/

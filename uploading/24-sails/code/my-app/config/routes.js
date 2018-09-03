@@ -27,7 +27,20 @@ module.exports.routes = {
   '/': {
     view: 'pages/homepage',    
   },
-  'get /categories/categoriesPage': 'CategoriesController.categoriesPage'
+  'get /categories/categoriesPage': 'CategoriesController.categoriesPage',
+  'get /categories/addCategory': {
+    view: 'pages/addCategory',    
+  },
+  'post /categories/addCategory': 'CategoriesController.addCategory',
+  'post /categories/delete/:id': 'CategoriesController.deleteCategory',
+
+  'get /categories/editCategory': {
+    view: 'pages/editCategory',    
+  },
+
+  'get /categories/edit/:id': 'CategoriesController.editCategory',
+  'post /categories/update/:id': 'CategoriesController.updateCategory'
+  
 
   /***************************************************************************
   *                                                                          *

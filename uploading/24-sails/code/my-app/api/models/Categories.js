@@ -7,7 +7,7 @@
 
 module.exports = {    
     attributes: {    
-        categoryname: {
+        categoryName: {
           type: 'string',
           description: 'Name of a category, like: Electronics, Foods',
           required: true
