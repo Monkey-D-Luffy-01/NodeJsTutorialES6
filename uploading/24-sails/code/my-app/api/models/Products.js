@@ -7,23 +7,33 @@
 
 module.exports = {
 
-  attributes: {
-
-    //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
-    //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
-    //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-
-
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
-
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
-  },
+  attributes: {    
+        productName: {
+          type: 'string',
+          description: 'Name of a category, like: Electronics, Foods',
+          required: true
+        },
+        imageURL: {
+          type: 'string',
+          description: 'image web link',
+          required: false 
+        },
+        categoryID: {
+          type: 'string',
+          description: "category's ID",
+          required: true
+        },
+        unit: {
+          type: 'string',
+          description: "Products's unit",
+          required: true
+        },
+        price: {
+          type: 'number',
+          description: 'Price of a Product',
+          required: false
+        },
+    },      
 
 };
 

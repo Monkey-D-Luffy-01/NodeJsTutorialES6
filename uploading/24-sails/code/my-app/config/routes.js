@@ -40,8 +40,20 @@ module.exports.routes = {
 
   'get /categories/edit/:id': 'CategoriesController.editCategory',
   'post /categories/update/:id': 'CategoriesController.updateCategory',
-  'post /file/uploadImage': 'FileController.uploadImage'
+  'post /file/uploadImage': 'FileController.uploadImage',
   
+  //products
+  'get /products/findAll': 'ProductsController.findAll',
+  'get /products/filterProducts/:nameContains': 'ProductsController.filterProducts',
+  'post /products/addProduct': 'ProductsController.addProduct',
+  'delete /products/deleteProduct': 'ProductsController.deleteProduct',
+  'put /products/updateProduct/:id': 'ProductsController.updateProduct',
+
+
+
+
+
+
 
   /***************************************************************************
   *                                                                          *
