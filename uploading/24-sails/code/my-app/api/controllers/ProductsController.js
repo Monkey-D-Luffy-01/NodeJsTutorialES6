@@ -9,7 +9,9 @@
 module.exports = {
   findAll:  async (req, res) => {   	  	
   	try {
-  		const products = await Products.find({});  		
+  		const {limit, skip} = req.query;
+  		console.log(`limit = ${limit}, skip = ${skip}`);
+  		const products = await Products.find({where: {  }, limit, skip});  		
       	res.json({
       		result: "ok",
       		message: "Query all products successfully",
@@ -25,9 +27,9 @@ module.exports = {
   filterProducts:  async (req, res) => {   	  	
   	try {
   		const {nameContains} = req.params;
-  		const products = await Products.find({ "productName": { 
-  			$regex: nameContains, $options: 'i' 
-  		} });  		
+  		const products = await Products.find({ 
+  			productName: { contains: nameContains } 
+  		});  		
       	res.json({
       		result: "ok",
       		message: "Filter products successfully",
@@ -45,7 +47,7 @@ module.exports = {
   	try {
   		console.log("addProduct");
   		const {productName, imageURL, categoryID, unit, price} = req.body;  		
-  		const newProduct = await Products.create({productName, imageURL, categoryID, unit, price});
+  		const newProduct = await Products.create({productName, imageURL, categoryID, unit, price}).fetch();  		
   		res.json({
       		result: "ok",
       		message: "Create new Product successfully",
@@ -61,12 +63,19 @@ module.exports = {
 
   deleteProduct:  async (req, res) => {   	  	
   	try {
-  		const {id} = req.params;  		
-  		await Products.destroy({id});
+  		const {id} = req.params;  	
+  		if (id == null || id.length === 0) {
+  			res.json({
+  				result: "failed",  			
+  				message: `Cannot find Product to delete`
+  			});
+      		return
+  		}
+  		const deletedProduct = await Products.destroy({id}).fetch();
   		res.json({
       		result: "ok",
       		message: "Delete successfully",
-      		data: {}
+      		data: deletedProduct
       	});
   	} catch(error) {
   		res.json({
@@ -78,23 +87,30 @@ module.exports = {
 
   updateProduct:  async (req, res) => {//Open "Edit Product form"   	  	
   	try {
-  		const {id} = req.params; 
+  		const {id} = req.params;   		
   		const {productName, imageURL, categoryID, unit, price} = req.body;  		  		
+  		console.log(`productName = ${JSON.stringify(productName)}`);
       	//console.log(`aa112: ${id}, productName = ${productName}, description = ${description}`);
-      	const foundProduct = await Products.find({id});  		
-      	if (!foundProduct) {
-      			res.json({
+      	let foundProduct = await Products.findOne({id});  		
+      	if (foundProduct == null) {
+      		res.json({
   				result: "failed",  			
   				message: `Cannot find Product to update`
   			});
-      	}
-  		const product = await Products.update({id}, {
-  			productName: productName ? productName : foundProduct.productName, 
-  			imageURL: imageURL ? imageURL : foundProduct.imageURL, 
-  			categoryID: categoryID ? categoryID : foundProduct.categoryID, 
-  			unit: unit ? unit : foundProduct.unit, 
-  			price: price ? price : foundProduct.price 
-  		});
+      		return
+      	}      	      	
+  		foundProduct = await Products.update({id}, {
+  			productName: 	productName != null ? productName : foundProduct.productName, 
+  			imageURL: 		imageURL != null ? imageURL : foundProduct.imageURL, 
+  			categoryID: 	categoryID != null ? categoryID : foundProduct.categoryID, 
+  			unit: 			unit != null ? unit : foundProduct.unit,  
+  			price: 			price != null ? price : foundProduct.price 
+  		}).fetch();  		
+  		res.json({
+      		result: "ok",
+      		message: "Update a product successfully",
+      		data: foundProduct
+      	});
   		
   	} catch(error) {
   		res.json({

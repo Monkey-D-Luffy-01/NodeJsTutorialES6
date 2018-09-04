@@ -26,7 +26,7 @@ module.exports = {
         unit: {
           type: 'string',
           description: "Products's unit",
-          required: true
+          required: false
         },
         price: {
           type: 'number',

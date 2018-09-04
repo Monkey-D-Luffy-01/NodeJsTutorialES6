@@ -46,7 +46,7 @@ module.exports.routes = {
   'get /products/findAll': 'ProductsController.findAll',
   'get /products/filterProducts/:nameContains': 'ProductsController.filterProducts',
   'post /products/addProduct': 'ProductsController.addProduct',
-  'delete /products/deleteProduct': 'ProductsController.deleteProduct',
+  'delete /products/deleteProduct/:id': 'ProductsController.deleteProduct',
   'put /products/updateProduct/:id': 'ProductsController.updateProduct',
 
 
