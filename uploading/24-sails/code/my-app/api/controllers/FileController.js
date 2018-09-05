@@ -25,7 +25,7 @@ module.exports = {
         const filename = uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1);
         const uploadLocation = `${process.cwd()}/assets/images/uploads/${filename}`;        
         const tempLocation = `${process.cwd()}/.tmp/public/images/uploads/${filename}`;
-        const urlString = `${sails.getBaseUrl()}/images/uploads/${filename}`;
+        const urlString = `${sails.config.custom.baseUrl}/images/uploads/${filename}`;
         //Copy the file to the temp folder so that it becomes available immediately
         fs.createReadStream(uploadLocation).pipe(fs.createWriteStream(tempLocation));
         return res.json({
