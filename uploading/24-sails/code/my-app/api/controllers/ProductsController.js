@@ -12,10 +12,12 @@ module.exports = {
   		const {limit, skip} = req.query;
   		console.log(`limit = ${limit}, skip = ${skip}`);
   		const products = await Products.find({where: {  }, limit, skip});  		
-      	res.json({
+      const totalProducts = await Products.count({});
+      res.json({
       		result: "ok",
       		message: "Query all products successfully",
-      		data: products
+      		data: products,
+          numberOfPages: Math.ceil(totalProducts/limit)
       	});
   	} catch(error) {  		
   		res.json({
