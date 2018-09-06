@@ -26,6 +26,30 @@ module.exports = {
   		});
   	}  
   },   
+  findByID:  async (req, res) => {         
+    try {
+      const {id} = req.params;    
+      if (id == null || id.length === 0) {
+        res.json({
+          result: "failed",       
+          message: `Cannot find Product to show`
+        });
+          return
+      }
+      const product = await Products.findOne({id});
+      res.json({
+          result: "ok",
+          message: "Show detail product successfully",
+          data: product
+        });
+    } catch(error) {
+      res.json({
+        result: "failed",       
+        message: `Cannot find product: ${error}`
+      });
+    }  
+  }, 
+ 
   filterProducts:  async (req, res) => {   	  	
   	try {
   		const {nameContains} = req.params;
