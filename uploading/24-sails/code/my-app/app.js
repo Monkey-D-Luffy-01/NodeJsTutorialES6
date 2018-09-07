@@ -27,6 +27,9 @@ npm install node-query
 Search bootstrap cdn, paste to layout.ejs
 https://getbootstrap.com/docs/4.1/getting-started/introduction/
 
+Connect DB:
+mongo mongodb://localhost:27017/nodejstutorial
+
 db.products.drop();
 db.products.find();
 
@@ -211,7 +214,6 @@ imageURL:"https://s7d2.scene7.com/is/image/academy/20024690?wid=500&hei=500",
 categoryID: "5b8d08696c12c55f1c8302a3",
 unit: "5 kg pkg", 
 price: 19.5});
-
 
 db.products.count();
 */

@@ -125,7 +125,7 @@ module.exports = {
   			});
       		return
       	}      	      	
-  		foundProduct = await Products.update({id}, {
+  		let updatedProducts = await Products.update({id}, {
   			productName: 	productName != null ? productName : foundProduct.productName, 
   			imageURL: 		imageURL != null ? imageURL : foundProduct.imageURL, 
   			categoryID: 	categoryID != null ? categoryID : foundProduct.categoryID, 
@@ -135,7 +135,7 @@ module.exports = {
   		res.json({
       		result: "ok",
       		message: "Update a product successfully",
-      		data: foundProduct
+      		data: updatedProducts[0]
       	});
   		
   	} catch(error) {
